@@ -34,17 +34,13 @@ export class ProductsService {
   }
 
   update(id: number, payload: any) {
-    const found = this.products.findIndex((item) => item.id === id);
-    if (found) {
-      this.products[found] = {
-        id,
-        ...payload,
-      };
-    } else throwError('Product not found');
-    return {
-      message: 'Product update',
-      update: this.products[found],
+    const index = this.products.findIndex((item) => item.id == id);
+    if (!this.products[index]) return { message: 'Id no existe' };
+    this.products[index] = {
+      ...this.products[index],
+      ...payload,
     };
+    return this.products[index];
   }
 
   delete(id: number) {
