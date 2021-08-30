@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { throwError } from 'rxjs';
 import { Product } from './../../entities/product.entity';
 @Injectable()
 export class ProductsService {
@@ -30,5 +31,29 @@ export class ProductsService {
     };
     this.products.push(newProduct);
     return newProduct;
+  }
+
+  update(id: number, payload: any) {
+    const found = this.products.findIndex((item) => item.id === id);
+    if (found) {
+      this.products[found] = {
+        id,
+        ...payload,
+      };
+    } else throwError('Product not found');
+    return {
+      message: 'Product update',
+      update: this.products[found],
+    };
+  }
+
+  delete(id: number) {
+    const found = this.products.findIndex((item) => item.id === id);
+    if (found) {
+      this.products.splice(found, 1);
+    } else throwError('Product not found');
+    return {
+      message: `Product delete${id}`,
+    };
   }
 }
