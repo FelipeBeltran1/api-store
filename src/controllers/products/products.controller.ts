@@ -6,7 +6,7 @@ import {
   Param,
   Post,
   Put,
-  Query,
+  //Query,
   //ParseIntPipe,
 } from '@nestjs/common';
 
@@ -18,11 +18,8 @@ export class ProductsController {
   constructor(private productService: ProductsService) {}
 
   @Get()
-  getProducts(
-    @Query('limit') limit = 100,
-    @Query('offset') offset = 0,
-    @Query('brand') brand: string,
-  ) {
+  getProducts() {
+    //@Query('brand') brand: string, //@Query('offset') offset = 0, //@Query('limit') limit = 100,
     // return {
     //   message: `products: limit=> ${limit} offset=>${offset} brand=>${brand}`,
     // };
