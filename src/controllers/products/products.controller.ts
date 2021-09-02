@@ -12,6 +12,7 @@ import {
 
 import { ProductsService } from './../../services/products/products.service';
 import { ParseIntPipe } from './../../@common/parse-int.pipe';
+import { CreateProductDto } from './../../dtos/products.dto';
 @Controller('products')
 export class ProductsController {
   constructor(private productService: ProductsService) {}
@@ -47,7 +48,7 @@ export class ProductsController {
   }
 
   @Post()
-  createProduct(@Body() payload: any) {
+  createProduct(@Body() payload: CreateProductDto) {
     // return {
     //   message: 'crear',
     //   payload,
