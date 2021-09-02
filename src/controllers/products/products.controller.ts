@@ -65,8 +65,6 @@ export class ProductsController {
 
   @Delete(':id')
   deleteProduct(@Param('id') id: number) {
-    return {
-      message: `eliminado ${id}`,
-    };
+    return this.productService.delete(id);
   }
 }
