@@ -9,7 +9,6 @@ export class BrandsService {
     {
       id: 1,
       name: 'Brand 1',
-      description: 'asd',
       image: '',
     },
   ];
