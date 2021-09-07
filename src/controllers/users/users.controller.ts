@@ -7,36 +7,29 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { CreateUserDto, UpdateUserDto } from 'src/dtos/user.dto';
+import { UsersService } from 'src/services/users/users.service';
 
 @Controller('users')
 export class UsersController {
+  constructor(private userService: UsersService) {}
   @Get()
   getUsers() {
-    return {
-      message: `customers`,
-    };
+    return this.userService.findAll();
   }
 
   @Post()
-  createUser(@Body() payload: any) {
-    return {
-      message: 'crear user',
-      payload,
-    };
+  createUser(@Body() payload: CreateUserDto) {
+    return this.userService.create(payload);
   }
 
   @Put(':id')
-  updateUser(@Param('id') id: number, @Body() payload: any) {
-    return {
-      id,
-      payload,
-    };
+  updateUser(@Param('id') id: number, @Body() payload: UpdateUserDto) {
+    return this.userService.update(id, payload);
   }
 
   @Delete(':id')
   deleteUser(@Param('id') id: number) {
-    return {
-      message: `eliminado ${id}`,
-    };
+    return this.userService.delete(id);
   }
 }
