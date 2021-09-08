@@ -8,8 +8,8 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { CreateCategoryDto, UpdateCategoryDto } from 'src/dtos/categories.dto';
-import { CategoriesService } from './../../services/categories/categories.service';
+import { CreateCategoryDto, UpdateCategoryDto } from './../dtos/categories.dto';
+import { CategoriesService } from './../services/categories.service';
 
 @Controller('categories')
 export class CategoriesController {
