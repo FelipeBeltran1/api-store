@@ -8,7 +8,7 @@ export class OrdersService {
   private orders: Order[] = [
     {
       id: 1,
-      name: 'Product 1',
+      name: 'Order 1',
       description: 'asd',
       date: '2021-09-07',
     },
