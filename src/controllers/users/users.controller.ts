@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Post,
   Put,
 } from '@nestjs/common';
@@ -16,6 +17,11 @@ export class UsersController {
   @Get()
   getUsers() {
     return this.userService.findAll();
+  }
+
+  @Get(':userId')
+  getProduct(@Param('userId', ParseIntPipe) userId: number) {
+    return this.userService.findOne(userId);
   }
 
   @Post()
