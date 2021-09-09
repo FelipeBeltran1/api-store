@@ -1,6 +1,7 @@
+import { User } from './user.entity';
+import { Product } from './../../products/entities/product.entity';
 export class Order {
-  id: number;
-  name: string;
-  description: string;
-  date: string;
+  date: Date;
+  user: User;
+  products: Product[];
 }
