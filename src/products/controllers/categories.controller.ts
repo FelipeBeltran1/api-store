@@ -8,7 +8,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { CreateCategoryDto, UpdateCategoryDto } from './../dtos/categories.dto';
 import { CategoriesService } from './../services/categories.service';
 @ApiTags('Categories')
@@ -17,6 +17,7 @@ export class CategoriesController {
   constructor(private categoryService: CategoriesService) {}
 
   @Get()
+  @ApiOperation({ summary: 'List of categories' })
   getCategories() {
     return this.categoryService.findAll();
   }

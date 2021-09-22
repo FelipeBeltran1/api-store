@@ -8,7 +8,7 @@ import {
   Param,
   ParseIntPipe,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { CreateBrandDto, UpdateBrandDto } from 'src/products/dtos/brands.dto';
 import { BrandsService } from '../services/brands.service';
 @ApiTags('Brands')
@@ -17,6 +17,7 @@ export class BrandsController {
   constructor(private brandService: BrandsService) {}
 
   @Get()
+  @ApiOperation({ summary: 'List of brands' })
   getBrands() {
     return this.brandService.findAll();
   }

@@ -8,7 +8,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { CreateUserDto, UpdateUserDto } from './../dtos/user.dto';
 import { UsersService } from './../services/users.service';
 @ApiTags('Users')
@@ -16,6 +16,7 @@ import { UsersService } from './../services/users.service';
 export class UsersController {
   constructor(private userService: UsersService) {}
   @Get()
+  @ApiOperation({ summary: 'List of users' })
   getUsers() {
     return this.userService.findAll();
   }
