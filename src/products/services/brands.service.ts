@@ -26,7 +26,6 @@ export class BrandsService {
   }
 
   create(payload: CreateBrandDto) {
-    console.log(payload);
     this.counterId = this.counterId + 1;
     const newBrand = {
       id: this.counterId,

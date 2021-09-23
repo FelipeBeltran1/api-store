@@ -22,9 +22,6 @@ export class UsersService {
   ];
 
   findAll() {
-    const apiKey = this.configService.get('API_KEY');
-    const dbName = this.configService.get('DATABASE_NAME');
-    console.log(apiKey, dbName);
     return this.users;
   }
 
@@ -37,7 +34,6 @@ export class UsersService {
   }
 
   create(payload: CreateUserDto) {
-    console.log(payload);
     this.counterId = this.counterId + 1;
     const newUser = {
       id: this.counterId,

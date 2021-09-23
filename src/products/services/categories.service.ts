@@ -26,7 +26,6 @@ export class CategoriesService {
   }
 
   create(payload: CreateCategoryDto) {
-    console.log(payload);
     this.counterId = this.counterId + 1;
     const newProduct = {
       id: this.counterId,

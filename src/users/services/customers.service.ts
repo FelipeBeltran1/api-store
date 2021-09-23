@@ -30,7 +30,6 @@ export class CustomersService {
   }
 
   create(payload: CreateCustomerDto) {
-    console.log(payload);
     this.counterId = this.counterId + 1;
     const newCustomer = {
       id: this.counterId,
