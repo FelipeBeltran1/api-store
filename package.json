@@ -21,19 +21,23 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@heroku/buildpack-registry": "^1.0.1",
-    "@nestjs/cli": "^8.1.1",
+    "@nestjs/common": "^8.0.6",
     "@nestjs/config": "^1.0.1",
+    "@nestjs/core": "^8.0.6",
+    "@nestjs/mapped-types": "^1.0.0",
     "@nestjs/platform-express": "^8.0.6",
     "@nestjs/swagger": "^5.0.9",
+    "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
     "joi": "^17.4.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.0.3",
+    "@heroku/buildpack-registry": "^1.0.1",
     "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
+    "@nestjs/cli": "^8.1.1",
     "@nestjs/schematics": "^8.0.3",
     "@nestjs/testing": "^8.0.6",
     "@types/express": "^4.17.13",
@@ -72,6 +76,6 @@
     "testEnvironment": "node"
   },
   "engines": {
-    "node": "14.x"
+    "node": "14.*"
   }
 }
