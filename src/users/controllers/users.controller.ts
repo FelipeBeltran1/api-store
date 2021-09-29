@@ -21,6 +21,11 @@ export class UsersController {
     return this.userService.findAll();
   }
 
+  @Get('tasks')
+  getTasks() {
+    return this.userService.getTasks();
+  }
+
   @Get(':userId')
   getProduct(@Param('userId', ParseIntPipe) userId: number) {
     return this.userService.findOne(userId);
