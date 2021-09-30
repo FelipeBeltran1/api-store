@@ -11,12 +11,12 @@ export class Product {
   @Column('character varying', { length: 250 })
   description: string;
 
-  @Column()
+  @Column('int')
   price: number;
 
-  @Column()
+  @Column('int')
   stock: number;
 
-  @Column()
+  @Column('varchar')
   image: string;
 }
