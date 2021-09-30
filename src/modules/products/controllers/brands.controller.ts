@@ -24,10 +24,7 @@ export class BrandsController {
 
   @Get(':brandId')
   getBrand(@Param('brandId', ParseIntPipe) brandId: number) {
-    return {
-      msg: `Marca ${brandId}`,
-      body: this.brandService.findOne(brandId),
-    };
+    return this.brandService.findOne(brandId);
   }
 
   @Post()
