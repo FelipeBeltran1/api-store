@@ -32,10 +32,7 @@ export class ProductsController {
 
   @Get(':productId')
   getProduct(@Param('productId', ParseIntPipe) productId: number) {
-    return {
-      msg: `Producto${productId}`,
-      body: this.productService.findOne(productId),
-    };
+    return this.productService.findOne(productId);
   }
 
   @Post()
