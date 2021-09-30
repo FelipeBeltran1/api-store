@@ -28,7 +28,7 @@ export class ProductsService {
     return this.productRepository.save(newProduct);
   }
 
-  async update(id: number, payload: UpdateProductDto) {
+  async update(id: number, payload: UpdateProductDto): Promise<Product> {
     const product = await this.findOne(id);
     this.productRepository.merge(product, payload);
     return await this.productRepository.save(product);
