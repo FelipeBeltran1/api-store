@@ -10,17 +10,6 @@ export class ProductsService {
     @InjectRepository(Product, 'products')
     private readonly productRepository: Repository<Product>,
   ) {}
-  // private counterId = 1;
-  // private products: Product[] = [
-  //   {
-  //     id: 1,
-  //     name: 'Product 1',
-  //     description: 'asd',
-  //     price: 122,
-  //     stock: 10,
-  //     image: '',
-  //   },
-  // ];
 
   async findAll(): Promise<Product[]> {
     return await this.productRepository.find();
