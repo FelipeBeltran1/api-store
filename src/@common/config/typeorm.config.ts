@@ -8,9 +8,13 @@ export default registerAs('typeorm', () => {
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
-    synchronize: true,
-    logging: false,
+    synchronize: false,
+    //logging: false,
     entities: ['dist/entities/**/*entity{.ts,.js}'],
+    migrations: ['dist/src/db/migrations/*.js'],
+    cli: {
+      migrationsDir: 'src/@common/db/migrations',
+    },
     //entities: [(process.env.NODE_ENV === 'local' ? 'src/entities/**/*.ts' : 'dist/entities/**/*.js' )]
   };
   console.log(process.env.DB_TYPE);
