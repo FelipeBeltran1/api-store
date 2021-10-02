@@ -1,18 +1,21 @@
 import {
+  Column,
   CreateDateColumn,
   Entity,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Customer } from './customer.entity';
-import { OrderProduct } from './orderProduct.entity';
+import { Product } from '../products/product.entity';
+import { Order } from './order.entity';
 
-@Entity('order', { schema: 'users' })
-export class Order {
+@Entity({ schema: 'users' })
+export class OrderProduct {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
+
+  @Column('int')
+  quantity: number;
 
   @CreateDateColumn({
     type: 'timestamptz',
@@ -26,9 +29,9 @@ export class Order {
   })
   updateAt: Date;
 
-  @ManyToOne(() => Customer, (customer) => customer.orders)
-  customer: Customer;
+  @ManyToOne(() => Product)
+  product: Product;
 
-  @OneToMany(() => OrderProduct, (item) => item.order)
-  items: OrderProduct[];
+  @ManyToOne(() => Order, (order) => order.items)
+  order: Order;
 }
