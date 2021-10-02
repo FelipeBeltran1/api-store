@@ -2,11 +2,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   Unique,
   UpdateDateColumn,
 } from 'typeorm';
+import { Customer } from './customer.entity';
 import { Order } from './order.entity';
 
 @Entity('user', { schema: 'users' })
@@ -24,9 +27,6 @@ export class User {
   @Column('character varying', { length: 250 })
   role: string;
 
-  @OneToMany(() => Order, (order) => order.user)
-  orders: Order[];
-
   @CreateDateColumn({
     type: 'timestamptz',
     default: () => 'CURRENT_TIMESTAMP',
@@ -38,4 +38,11 @@ export class User {
     default: () => 'CURRENT_TIMESTAMP',
   })
   updateAt: Date;
+
+  @OneToMany(() => Order, (order) => order.user)
+  orders: Order[];
+
+  @OneToOne(() => Customer, (customer) => customer.user, { nullable: true })
+  @JoinColumn()
+  customer: Customer;
 }
