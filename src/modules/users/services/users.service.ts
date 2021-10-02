@@ -5,25 +5,20 @@ import { CreateUserDto, UpdateUserDto } from '../dtos/user.dto';
 import { User } from 'src/entities/users/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { CustomersService } from './customers.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User, 'users')
     private readonly userRepository: Repository<User>,
+    private customerService: CustomersService,
   ) {}
-  // private counterId = 1;
-  // private users: User[] = [
-  //   {
-  //     id: 1,
-  //     email: 'User 1',
-  //     password: '123',
-  //     role: 'admin',
-  //   },
-  // ];
 
   async findAll(): Promise<User[]> {
-    return await this.userRepository.find();
+    return await this.userRepository.find({
+      relations: ['customer'],
+    });
   }
 
   async findOne(id: number): Promise<User> {
@@ -37,6 +32,10 @@ export class UsersService {
 
   async create(payload: CreateUserDto) {
     const newUser = await this.userRepository.create(payload);
+    if (payload.customerId) {
+      const customer = await this.customerService.findOne(payload.customerId);
+      newUser.customer = customer;
+    }
     return this.userRepository.save(newUser);
   }
 
