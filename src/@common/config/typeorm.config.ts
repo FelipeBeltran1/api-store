@@ -11,9 +11,10 @@ export default registerAs('typeorm', () => {
     synchronize: false,
     //logging: false,
     entities: ['dist/entities/**/*entity{.ts,.js}'],
-    migrations: ['dist/src/db/migrations/*.js'],
+    migrationsTableName: 'migrations',
+    migrations: ['dist/src/@common/migrations/*.ts'],
     cli: {
-      migrationsDir: 'src/@common/db/migrations',
+      migrationsDir: 'src/@common/migrations/migrations',
     },
     //entities: [(process.env.NODE_ENV === 'local' ? 'src/entities/**/*.ts' : 'dist/entities/**/*.js' )]
   };
