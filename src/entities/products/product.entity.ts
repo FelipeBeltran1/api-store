@@ -7,11 +7,13 @@ import {
   ManyToOne,
   ManyToMany,
   JoinTable,
+  Index,
 } from 'typeorm';
 import { Brand } from './brand.entity';
 import { Category } from './category.entity';
 
 @Entity('product', { schema: 'products' })
+@Index(['price', 'stock'])
 export class Product {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
@@ -22,6 +24,7 @@ export class Product {
   @Column('character varying', { length: 250 })
   description: string;
 
+  @Index()
   @Column('int')
   price: number;
 
