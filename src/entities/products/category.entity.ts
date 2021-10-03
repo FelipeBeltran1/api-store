@@ -2,13 +2,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
   ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Product } from './product.entity';
 
-@Entity('category', { schema: 'products' })
+@Entity('categories', { schema: 'products' })
 export class Category {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
@@ -20,17 +21,28 @@ export class Category {
   description: string;
 
   @CreateDateColumn({
+    name: 'create_at',
     type: 'timestamptz',
     default: () => 'CURRENT_TIMESTAMP',
   })
   createAt: Date;
 
   @UpdateDateColumn({
+    name: 'update_at',
     type: 'timestamptz',
     default: () => 'CURRENT_TIMESTAMP',
   })
   updateAt: Date;
 
   @ManyToMany(() => Product, (product) => product.categories)
+  @JoinTable({
+    name: 'categories_products',
+    joinColumn: {
+      name: 'category_id',
+    },
+    inverseJoinColumn: {
+      name: 'product_id',
+    },
+  })
   products: Product[];
 }

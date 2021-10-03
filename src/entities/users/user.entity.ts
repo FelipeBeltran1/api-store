@@ -10,7 +10,7 @@ import {
 } from 'typeorm';
 import { Customer } from './customer.entity';
 
-@Entity('user', { schema: 'users' })
+@Entity('users', { schema: 'users' })
 @Unique(['email'])
 export class User {
   @PrimaryGeneratedColumn({ type: 'bigint' })
@@ -26,18 +26,20 @@ export class User {
   role: string;
 
   @CreateDateColumn({
+    name: 'create_at',
     type: 'timestamptz',
     default: () => 'CURRENT_TIMESTAMP',
   })
   createAt: Date;
 
   @UpdateDateColumn({
+    name: 'update_at',
     type: 'timestamptz',
     default: () => 'CURRENT_TIMESTAMP',
   })
   updateAt: Date;
 
   @OneToOne(() => Customer, (customer) => customer.user, { nullable: true })
-  @JoinColumn()
+  @JoinColumn({ name: 'customer_id' })
   customer: Customer;
 }
