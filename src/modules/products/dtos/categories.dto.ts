@@ -1,5 +1,11 @@
 import { PartialType, ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsOptional,
+  IsPositive,
+  IsString,
+  Min,
+} from 'class-validator';
 export class CreateCategoryDto {
   @IsString()
   @IsNotEmpty()
@@ -12,3 +18,13 @@ export class CreateCategoryDto {
   readonly description: string;
 }
 export class UpdateCategoryDto extends PartialType(CreateCategoryDto) {}
+
+export class FilterCategoryDto {
+  @IsOptional()
+  @IsPositive()
+  limit: number;
+
+  @IsOptional()
+  @Min(0)
+  offset: number;
+}

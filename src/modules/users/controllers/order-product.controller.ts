@@ -5,9 +5,13 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  Query,
 } from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
-import { CreateOrderProductDto } from '../dtos/orderProduct.dto';
+import {
+  CreateOrderProductDto,
+  FilterOrderProductDto,
+} from '../dtos/orderProduct.dto';
 import { OrderProductService } from '../services/order-product.service';
 
 @Controller('order-product')
@@ -16,8 +20,8 @@ export class OrderProductController {
 
   @Get()
   @ApiOperation({ summary: 'List of orders' })
-  getCustomers() {
-    return this.orderProductService.findAll();
+  getCustomers(@Query() params: FilterOrderProductDto) {
+    return this.orderProductService.findAll(params);
   }
 
   @Get(':orderProductId')

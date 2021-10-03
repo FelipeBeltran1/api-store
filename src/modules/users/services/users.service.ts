@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { CreateUserDto, UpdateUserDto } from '../dtos/user.dto';
+import { CreateUserDto, FilterUserDto, UpdateUserDto } from '../dtos/user.dto';
 //import { Order } from 'src/entities/users/order.entity';
 import { User } from 'src/entities/users/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -15,7 +15,15 @@ export class UsersService {
     private customerService: CustomersService,
   ) {}
 
-  async findAll(): Promise<User[]> {
+  async findAll(params?: FilterUserDto): Promise<User[]> {
+    if (params) {
+      const { limit, offset } = params;
+      return await this.userRepository.find({
+        relations: ['customer'],
+        take: limit,
+        skip: offset,
+      });
+    }
     return await this.userRepository.find({
       relations: ['customer'],
     });

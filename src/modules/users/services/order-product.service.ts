@@ -6,6 +6,7 @@ import { OrderProduct } from 'src/entities/users/orderProduct.entity';
 import { Repository } from 'typeorm';
 import {
   CreateOrderProductDto,
+  FilterOrderProductDto,
   UpdateOrderProductDto,
 } from '../dtos/orderProduct.dto';
 
@@ -20,7 +21,14 @@ export class OrderProductService {
     private productRepository: Repository<Product>,
   ) {}
 
-  async findAll() {
+  async findAll(params?: FilterOrderProductDto) {
+    if (params) {
+      const { limit, offset } = params;
+      return await this.itemRepository.find({
+        take: limit,
+        skip: offset,
+      });
+    }
     return await this.itemRepository.find();
   }
 

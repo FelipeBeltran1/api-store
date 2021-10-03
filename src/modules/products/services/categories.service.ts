@@ -2,7 +2,11 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Category } from 'src/entities/products/category.entity';
 import { Repository } from 'typeorm';
-import { CreateCategoryDto, UpdateCategoryDto } from '../dtos/categories.dto';
+import {
+  CreateCategoryDto,
+  FilterCategoryDto,
+  UpdateCategoryDto,
+} from '../dtos/categories.dto';
 
 @Injectable()
 export class CategoriesService {
@@ -11,7 +15,14 @@ export class CategoriesService {
     private readonly categoryRepository: Repository<Category>,
   ) {}
 
-  async findAll(): Promise<Category[]> {
+  async findAll(params?: FilterCategoryDto): Promise<Category[]> {
+    if (params) {
+      const { limit, offset } = params;
+      return await this.categoryRepository.find({
+        take: limit,
+        skip: offset,
+      });
+    }
     return await this.categoryRepository.find();
   }
 
