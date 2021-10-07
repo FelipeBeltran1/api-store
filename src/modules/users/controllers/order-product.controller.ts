@@ -1,16 +1,19 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
   Post,
+  Put,
   Query,
 } from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
 import {
   CreateOrderProductDto,
   FilterOrderProductDto,
+  UpdateOrderProductDto,
 } from '../dtos/orderProduct.dto';
 import { OrderProductService } from '../services/order-product.service';
 
@@ -32,5 +35,18 @@ export class OrderProductController {
   @Post()
   create(@Body() payload: CreateOrderProductDto) {
     return this.orderProductService.create(payload);
+  }
+
+  @Put(':id')
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() payload: UpdateOrderProductDto,
+  ) {
+    return this.orderProductService.update(id, payload);
+  }
+
+  @Delete(':id')
+  deleteOrderProduct(@Param('id', ParseIntPipe) id: number) {
+    return this.orderProductService.delete(id);
   }
 }
