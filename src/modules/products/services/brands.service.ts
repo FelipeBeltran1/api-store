@@ -19,6 +19,7 @@ export class BrandsService {
     if (params) {
       const { limit, offset } = params;
       return await this.brandRepository.find({
+        where: {},
         take: limit,
         skip: offset,
       });

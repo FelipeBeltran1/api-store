@@ -22,6 +22,7 @@ export class OrdersService {
     if (params) {
       const { limit, offset } = params;
       return await this.orderRepository.find({
+        where: {},
         take: limit,
         skip: offset,
       });

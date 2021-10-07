@@ -19,6 +19,7 @@ export class CategoriesService {
     if (params) {
       const { limit, offset } = params;
       return await this.categoryRepository.find({
+        where: {},
         take: limit,
         skip: offset,
       });

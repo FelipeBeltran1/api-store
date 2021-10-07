@@ -18,6 +18,7 @@ export class CustomersService {
     if (params) {
       const { limit, offset } = params;
       return await this.customerRepository.find({
+        where: {},
         take: limit,
         skip: offset,
       });
