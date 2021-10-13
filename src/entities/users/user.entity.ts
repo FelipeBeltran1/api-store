@@ -20,6 +20,7 @@ export class User {
   @Column('character varying', { length: 200 })
   email: string;
 
+  @Exclude()
   @Column('character varying', { length: 250 })
   password: string;
 

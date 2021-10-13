@@ -6,7 +6,7 @@ import { User } from 'src/entities/users/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CustomersService } from './customers.service';
-
+import * as bcrypt from 'bcrypt';
 @Injectable()
 export class UsersService {
   constructor(
@@ -38,8 +38,14 @@ export class UsersService {
     }
   }
 
+  async findByEmail(email: string) {
+    return this.userRepository.findOne({ where: { email } });
+  }
+
   async create(payload: CreateUserDto) {
     const newUser = await this.userRepository.create(payload);
+    const hashPassword = await bcrypt.hash(newUser.password, 10);
+    newUser.password = hashPassword;
     if (payload.customerId) {
       const customer = await this.customerService.findOne(payload.customerId);
       newUser.customer = customer;
