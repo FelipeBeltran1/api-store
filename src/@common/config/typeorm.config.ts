@@ -9,6 +9,7 @@ export default registerAs('typeorm', () => {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     synchronize: false,
+    apiKey: process.env.API_KEY,
     //logging: false,
     entities: ['dist/entities/**/*entity{.ts,.js}'],
     migrationsTableName: 'migrations',
