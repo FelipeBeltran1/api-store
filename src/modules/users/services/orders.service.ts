@@ -30,6 +30,14 @@ export class OrdersService {
     return await this.orderRepository.find();
   }
 
+  async ordersByCustomer(customerId: number) {
+    return await this.orderRepository.find({
+      where: {
+        customer: customerId,
+      },
+    });
+  }
+
   async findOne(id: number): Promise<Order> {
     try {
       const order = await this.orderRepository.findOneOrFail(id, {
