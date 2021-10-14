@@ -26,7 +26,7 @@ export class ProductsService {
       const where: FindConditions<Product> = {};
       const { limit, offset } = params;
       const { maxPrice, minPrice } = params;
-      console.log(minPrice, maxPrice);
+      //console.log(minPrice, maxPrice);
 
       if (minPrice && maxPrice) {
         where.price = Between(minPrice, maxPrice);
