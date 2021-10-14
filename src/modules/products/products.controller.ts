@@ -17,14 +17,19 @@ import {
   FilterProductDto,
   UpdateProductDto,
 } from './dtos/products.dto';
-import { AuthGuard } from '@nestjs/passport';
+import { JwtAuthGuard } from 'src/@common/guards/jwt-auth.guard';
+import { Public } from 'src/@common/decorators/public.decorator';
+import { Roles } from 'src/@common/decorators/roles.decorator';
+import { Role } from '../auth/models/roles.model';
+import { RolesGuard } from 'src/@common/guards/roles.guard';
 
-@UseGuards(AuthGuard('jwt'))
+@UseGuards(JwtAuthGuard, RolesGuard)
 @ApiTags('Products')
 @Controller('products')
 export class ProductsController {
   constructor(private productService: ProductsService) {}
 
+  @Public()
   @Get()
   @ApiOperation({ summary: 'List of products' })
   getProducts(@Query() params: FilterProductDto) {
@@ -38,11 +43,13 @@ export class ProductsController {
     };
   }
 
+  @Public()
   @Get(':productId')
   getProduct(@Param('productId', ParseIntPipe) productId: number) {
     return this.productService.findOne(productId);
   }
 
+  @Roles(Role.ADMIN)
   @Post()
   createProduct(@Body() payload: CreateProductDto) {
     return this.productService.create(payload);

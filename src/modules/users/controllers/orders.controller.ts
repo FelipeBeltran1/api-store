@@ -8,14 +8,16 @@ import {
   Post,
   Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/@common/guards/jwt-auth.guard';
 import {
   CreateOrderDto,
   FilterOrderDto,
   UpdateOrderDto,
 } from '../dtos/order.dto';
 import { OrdersService } from '../services/orders.service';
-
+@UseGuards(JwtAuthGuard)
 @Controller('orders')
 export class OrdersController {
   constructor(private orderService: OrdersService) {}

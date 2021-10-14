@@ -8,14 +8,17 @@ import {
   Post,
   Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/@common/guards/jwt-auth.guard';
 import {
   CreateCustomerDto,
   FilterCustomerDto,
   UpdateCustomerDto,
 } from 'src/modules/users/dtos/customers.dto';
 import { CustomersService } from '../services/customers.service';
+@UseGuards(JwtAuthGuard)
 @ApiTags('Customers')
 @Controller('customers')
 export class CustomersController {
